@@ -6,9 +6,9 @@
 **Nome:** Gabriella Ayres
 
 ## Repositório
-**Link do Repositorio:** [Portfólio](https://github.com/Gabi-Ayres/Gestor-de-Tarefa-Integrado.git)
+**Link do Repositorio:** [Gestor de Tarefas](https://github.com/Gabi-Ayres/Gestor-de-Tarefa-Integrado.git)
 
-## 🎯 Sobre o Projeto
+## 🎯 Sobre o Gestor de Tarefa
 
 Esta é a **versão COMPLETA** do projeto com:
 - ✅ **Polimorfismo COMPLETO** - 3 tipos de tarefas
