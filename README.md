@@ -10,38 +10,6 @@ Esta é a **versão COMPLETA** do projeto com:
 
 ---
 
-##  POLIMORFISMO EM AÇÃO - 3 Tipos de Tarefas
-
-### **1. BugTask - REGRAS RÍGIDAS**
-```typescript
-const bug = new BugTask(1, 'Corrigir erro');
-// Comportamento especial:
-// NÃO pode ser concluído se não estiver atribuído
-// Validação rigorosa no workflow
-// Logs especiais para bugs críticos
-```
-
-**Diferença:**
-- Bugs **DEVEM** passar pelo workflow completo
-- Validação de transições (não pode pular etapas)
-- Logs detalhados no console
-
-### **2. FeatureTask - REGRAS FLEXÍVEIS**
-```typescript
-const feature = new FeatureTask(2, 'Nova funcionalidade');
-// Comportamento especial:
-//  Pode pular etapas do workflow
-//  Workflow flexível
-//  Logs de feature completa
-```
-
-**Diferença:**
-- Features podem pular etapas
-- Workflow flexível
-- Pode ser concluída rapidamente
-
----
-
 ## 📚 Conceitos Implementados
 
 ### **Aula 3 - Módulos (100%):**
