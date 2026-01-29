@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor de Tarefas e Utilizadores</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>📋 Gestor de Tarefas e Utilizadores</h1>
+        <p class="subtitle">Sistema integrado com TypeScript e Polimorfismo</p>
+    </header>
+
+    <main class="container">
+        <!-- Seção de Utilizadores -->
+        <section class="section">
+            <div class="section-header">
+                <h2>👥 Gestão de Utilizadores</h2>
+            </div>
+
+            <!-- Estatísticas de Utilizadores -->
+            <div id="user-contador" class="stats-box"></div>
+
+            <!-- Formulário de Utilizadores -->
+            <div class="form-box">
+                <h3>Adicionar Utilizador</h3>
+                <div class="form-grid">
+                    <input type="text" id="user-name" placeholder="Nome completo" required>
+                    <input type="email" id="user-email" placeholder="Email" required>
+                </div>
+                <button type="button" id="user-add-btn" class="btn-primary btn-block">
+                    ➕ Adicionar Utilizador
+                </button>
+            </div>
+
+            <!-- Pesquisa de Utilizadores -->
+            <div class="search-box">
+                <input type="text" id="user-search" placeholder="🔍 Pesquisar por nome..." class="search-input">
+            </div>
+
+            <!-- Filtros e Ordenação -->
+            <div class="actions-box">
+                <div class="button-grid">
+                    <button id="filter-active-users" class="btn-action">✓ Ativos</button>
+                    <button id="filter-all-users" class="btn-action">👥 Todos</button>
+                    <button id="sort-users-btn" class="btn-action">🔤 A-Z</button>
+                </div>
+            </div>
+
+            <!-- Container de Utilizadores -->
+            <div id="user-container" class="card-container"></div>
+        </section>
+
+        <!-- Seção de Tarefas -->
+        <section class="section">
+            <div class="section-header">
+                <h2>📝 Gestão de Tarefas</h2>
+            </div>
+
+            <!-- Contador de Tarefas -->
+            <div id="task-output" class="stats-box"></div>
+
+            <!-- Formulário de Tarefas -->
+            <div class="form-box">
+                <h3>Adicionar Tarefa</h3>
+                <input id="task-input" type="text" placeholder="Título da tarefa" required class="input-full">
+                
+                <div class="form-grid-3">
+                    <select id="task-categoria" required>
+                        <option value="" disabled selected>Categoria</option>
+                        <option value="Trabalho">💼 Trabalho</option>
+                        <option value="Pessoal">🏠 Pessoal</option>
+                        <option value="Outros">📌 Outros</option>
+                    </select>
+
+                    <select id="task-tipo" required>
+                        <option value="" disabled selected>Tipo</option>
+                        <option value="task">📝 Normal</option>
+                        <option value="bug">🐛 Bug</option>
+                        <option value="feature">✨ Feature</option>
+                    </select>
+
+                    <select id="task-utilizador">
+                        <option value="">Sem atribuição</option>
+                    </select>
+                </div>
+
+                <button type="button" id="task-add-btn" class="btn-primary btn-block">
+                    ➕ Adicionar Tarefa
+                </button>
+                <p id="pErro" class="error-message"></p>
+            </div>
+
+            <!-- Pesquisa de Tarefas -->
+            <div class="search-box">
+                <input type="text" id="task-search" placeholder="🔍 Pesquisar tarefas..." class="search-input">
+            </div>
+
+            <!-- Filtros e Ordenação -->
+            <div class="actions-box">
+                <div class="button-grid">
+                    <button id="filter-pending-tasks" class="btn-action">⏳ Pendentes</button>
+                    <button id="filter-all-tasks" class="btn-action">📋 Todas</button>
+                    <button id="sort-tasks-btn" class="btn-action">🔤 A-Z</button>
+                </div>
+            </div>
+
+            <!-- Lista de Tarefas -->
+            <ul id="task-list" class="task-list"></ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>Desenvolvido com TypeScript | Aula 3 e Aula 4 - Módulos e OOP</p>
+    </footer>
+
+    <script type="module" src="./dist/main.js"></script>
+</body>
+</html>
