@@ -1,6 +1,14 @@
 # 📋 Gestor de Tarefas e Utilizadores
 
-## 🎯 Sobre Esta Versão
+**Módulo 3:** JavaScript + TypeScript
+
+## Autora do Projeto
+**Nome:** Gabriella Ayres
+
+## Repositório
+**Link do Repositorio:** [Portfólio](https://github.com/Gabi-Ayres/Gestor-de-Tarefa-Integrado.git)
+
+## 🎯 Sobre o Projeto
 
 Esta é a **versão COMPLETA** do projeto com:
 - ✅ **Polimorfismo COMPLETO** - 3 tipos de tarefas
@@ -9,6 +17,22 @@ Esta é a **versão COMPLETA** do projeto com:
 - ✅ **Todos os exercícios** das Aulas 3 e 4
 
 ---
+
+##  Como Executar o Projeto
+
+1. Clona este repositório:
+   ```bash
+   git clone https://github.com/Gabi-Ayres/Gestor-de-Tarefa-Integrado.git
+
+2. Aceder a pasta do Projeto:
+   ```bash
+   cd Gestor de Tarefa Integrado
+
+3. Abre o ficheiro `index.html` no navegador:
+
+   (Duplo clique no ficheiro)
+
+--- 
 
 ## 📚 Conceitos Implementados
 
@@ -29,7 +53,6 @@ Esta é a **versão COMPLETA** do projeto com:
 -  **Ex. 8-10:** Permissões/Logs/Notificações (classes criadas)
 
 ---
-
 
 ## 🎨 Interface Visual
 
