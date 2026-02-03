@@ -3,6 +3,7 @@ export class BaseEntity {
     constructor(id) {
         this.id = id;
         this.createdAt = new Date();
+        BaseEntity.totalEntities += 1;
     }
     getId() {
         return this.id;
@@ -10,4 +11,8 @@ export class BaseEntity {
     getCreatedAt() {
         return this.createdAt;
     }
+    static getTotalEntities() {
+        return BaseEntity.getTotalEntities();
+    }
 }
+BaseEntity.totalEntities = 0;

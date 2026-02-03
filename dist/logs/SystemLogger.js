@@ -1,0 +1,13 @@
+export class SystemLogger {
+    constructor() { }
+    static log(message) {
+        this.logs.push(message);
+    }
+    static getLogs() {
+        return [...this.logs];
+    }
+    static clear() {
+        this.logs = [];
+    }
+}
+SystemLogger.logs = [];

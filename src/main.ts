@@ -1,6 +1,5 @@
 // Aula 3 - Exercício 6: Import e Export
-// main.ts LIMPO - só coordena, não faz nada!
-
+import { teste } from './teste/teste.js';
 import { initializeData } from './services/index.js';
 import { 
     setupUserForm, 
@@ -16,10 +15,9 @@ import {
     updateUITarefas
 } from './ui/index.js';
 
+
 // Função principal de inicialização
 function initializeApp(): void {
-    console.log('🚀 Iniciando Gestor de Tarefas e Utilizadores...');
-    console.log('📚 Com Polimorfismo Completo - 3 Tipos de Tarefas!\n');
 
     // 1. Carregar dados iniciais
     initializeData();
@@ -46,9 +44,15 @@ function initializeApp(): void {
     // 7. Renderizar interface inicial
     updateUI();
     updateUITarefas();
+
+    //console.log(SystemConfig.getInfo());
+
+    teste();
+
 }
 
 // Aguardar DOM carregar
 document.addEventListener('DOMContentLoaded', initializeApp);
+
 
 

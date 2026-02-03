@@ -1,4 +1,4 @@
-import { TaskStatus } from "tasks";
+import { TaskStatus } from "tasks/TaskStatus.js";
 export class StatsService {
     constructor(users, tasks) {
         this.users = users;

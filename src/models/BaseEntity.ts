@@ -2,10 +2,13 @@
 export class BaseEntity {
     public readonly id: number;
     protected createdAt: Date;
+    static totalEntities: number = 0
+
 
     constructor(id: number) {
         this.id = id;
         this.createdAt = new Date();
+        BaseEntity.totalEntities += 1;
     }
 
     getId(): number {
@@ -14,5 +17,10 @@ export class BaseEntity {
 
     getCreatedAt(): Date {
         return this.createdAt;
+    }
+
+    static getTotalEntities(): number {
+        return BaseEntity.getTotalEntities();
+
     }
 }
