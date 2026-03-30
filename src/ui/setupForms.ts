@@ -4,6 +4,7 @@ import { addUtilizador, getUtilizadoresAtivos } from '../services/userService.js
 import { addTarefa } from '../services/taskService.js';
 import { updateUI } from './renderUser.js';
 import { updateUITarefas } from './renderTask.js';
+import { addtagTask, addTag } from '../services/tagService.js';
 
 // Estado da aplicação
 let nextUserId = 6;
@@ -19,13 +20,13 @@ function mostrarErro(mensagem: string): void {
 }
 
 // Atualizar select de utilizadores
-function atualizarSelectUtilizadores(): void {
+async function  atualizarSelectUtilizadores(): Promise <void> {
     const select = document.getElementById("task-utilizador") as HTMLSelectElement;
     if (!select) return;
 
     select.innerHTML = '<option value="">Sem atribuição</option>';
 
-    const utilizadores = getUtilizadoresAtivos();
+    const utilizadores = await getUtilizadoresAtivos();
     utilizadores.forEach(u => {
         const option = document.createElement("option");
         option.value = u.id.toString();
@@ -106,6 +107,43 @@ export function setupTaskForm(): void {
         input.value = "";
         utilizadorSelect.value = "";
         updateUITarefas();
+    });
+}
+
+export function setupTagForm(): void {
+    const nomeInput = document.querySelector("#tag-name") as HTMLInputElement;
+    const adicionarBtn = document.querySelector("#tag-add-btn") as HTMLButtonElement;
+    const associarBtn = document.querySelector("#task-tag-add-btn") as HTMLButtonElement;
+
+    if (!nomeInput || !adicionarBtn || !associarBtn) return;
+
+    adicionarBtn.addEventListener("click", async () => {
+        const nome = nomeInput.value.trim();
+
+        if (nome === "" ) {
+            alert("Por favor, preencha nome válido!");
+            return;
+        }
+
+        try {
+            console.log("Tag criada:", nome);
+          await addTag(nome);
+        } catch (error: any) {
+            alert(`Erro: ${error.message}`);
+        }
+    });
+
+    associarBtn.addEventListener("click", async () => {
+        const taskId = parseInt((document.getElementById("lista-task") as HTMLSelectElement).value);
+        const tagId = parseInt((document.getElementById("lista-tag") as HTMLSelectElement).value);
+
+        if (isNaN(taskId) || isNaN(tagId)) {
+            alert("Por favor, selecione uma tarefa e uma tag para associar.");
+            return;
+        }
+
+        // Aqui você chamaria a função para associar a tag à tarefa
+      await addtagTask(taskId, tagId);
     });
 }
 

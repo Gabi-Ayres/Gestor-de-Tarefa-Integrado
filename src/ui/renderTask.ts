@@ -1,6 +1,7 @@
 import { ITask } from '../tasks/index.js';
 import { toggleTarefaComplete, removeTarefa, editarTarefa, getAllTarefas, getTarefasCount } from '../services/index.js';
 import { getAllUtilizadores } from '../services/userService.js';
+import { getTags } from '../api/apiTagService.js';
 
 // Aula 3 - Exercício 5: Renderização UI para tarefas
 
@@ -22,13 +23,32 @@ const emojis: { [key: string]: string } = {
     'task': '📝'
 };
 
-export function renderizarLista(tarefas: ITask[]): void {
+async function renderUsers() : Promise<void> {
+const users = await getAllUtilizadores();
+console.log("render users", users);
+
+if (users) {
+
+     const select = document.querySelector("#task-utilizador") as HTMLUListElement;
+     users.forEach(user => {
+            const opcao = document.createElement('option');
+                    opcao.value = user.id.toString();       // envia o id da user
+                    opcao.textContent = user.nome; // mostra o nome da user
+                    select.appendChild(opcao);
+     });
+    }    
+}
+
+export async function renderizarLista(tarefas: ITask[]): Promise<void> {
     const list = document.querySelector("#task-list") as HTMLUListElement;
+   
+    await renderUsers();
+    
     if (!list) return;
     
     list.innerHTML = "";
 
-    tarefas.forEach((tarefa) => {
+    tarefas.forEach(async (tarefa) => {
         const li = document.createElement("li");
         li.innerHTML = criarElementoTarefa(tarefa);
 
@@ -57,7 +77,9 @@ export function renderizarLista(tarefas: ITask[]): void {
 
         // INTEGRAÇÃO: Mostra quem está atribuído
         if (tarefa.assignedTo) {
-            const utilizador = getAllUtilizadores().find(u => u.id === tarefa.assignedTo);
+            const utilizadores = await getAllUtilizadores();
+            const utilizador =  utilizadores.find(u => u.id === tarefa.assignedTo);
+            
             if (utilizador) {
                 const atribuidoSpan = document.createElement("span");
                 atribuidoSpan.innerHTML = `(<em>👤 Atribuída a:</em> ${utilizador.nome})`;
@@ -121,16 +143,16 @@ function criarElementoTarefa(tarefa: ITask): string {
     return `<span>${tarefa.title}</span>${spanCategoria}`;
 }
 
-export function atualizarContadorTarefas(): void {
+export async function atualizarContadorTarefas(): Promise <void> {
     const outputElement = document.getElementById('task-output');
     if (outputElement) {
-        const { total, concluidas, pendentes } = getTarefasCount();
+        const { total, concluidas, pendentes } = await getTarefasCount();
         outputElement.innerHTML = `Você tem <span style="color: red;">${pendentes}</span> tarefas pendentes.`;
     }
 }
 
-export function updateUITarefas(): void {
-    renderizarLista(getAllTarefas());
+export async function updateUITarefas():Promise <void> {
+    renderizarLista(await getAllTarefas());
     // Atualizar utilizadores também (para contador de tarefas)
     import('./renderUser.js').then(module => {
         module.updateUI();

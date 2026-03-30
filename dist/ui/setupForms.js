@@ -1,9 +1,19 @@
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 import { UtilizadorClass } from '../models/index.js';
 import { TarefaClass, BugTask, FeatureTask } from '../tasks/index.js';
 import { addUtilizador, getUtilizadoresAtivos } from '../services/userService.js';
 import { addTarefa } from '../services/taskService.js';
 import { updateUI } from './renderUser.js';
 import { updateUITarefas } from './renderTask.js';
+import { addtagTask, addTag } from '../services/tagService.js';
 // Estado da aplicação
 let nextUserId = 6;
 let nextTaskId = 4;
@@ -17,16 +27,18 @@ function mostrarErro(mensagem) {
 }
 // Atualizar select de utilizadores
 function atualizarSelectUtilizadores() {
-    const select = document.getElementById("task-utilizador");
-    if (!select)
-        return;
-    select.innerHTML = '<option value="">Sem atribuição</option>';
-    const utilizadores = getUtilizadoresAtivos();
-    utilizadores.forEach(u => {
-        const option = document.createElement("option");
-        option.value = u.id.toString();
-        option.textContent = u.nome;
-        select.appendChild(option);
+    return __awaiter(this, void 0, void 0, function* () {
+        const select = document.getElementById("task-utilizador");
+        if (!select)
+            return;
+        select.innerHTML = '<option value="">Sem atribuição</option>';
+        const utilizadores = yield getUtilizadoresAtivos();
+        utilizadores.forEach(u => {
+            const option = document.createElement("option");
+            option.value = u.id.toString();
+            option.textContent = u.nome;
+            select.appendChild(option);
+        });
     });
 }
 // Configurar formulário de utilizadores
@@ -92,6 +104,37 @@ export function setupTaskForm() {
         utilizadorSelect.value = "";
         updateUITarefas();
     });
+}
+export function setupTagForm() {
+    const nomeInput = document.querySelector("#tag-name");
+    const adicionarBtn = document.querySelector("#tag-add-btn");
+    const associarBtn = document.querySelector("#task-tag-add-btn");
+    if (!nomeInput || !adicionarBtn || !associarBtn)
+        return;
+    adicionarBtn.addEventListener("click", () => __awaiter(this, void 0, void 0, function* () {
+        const nome = nomeInput.value.trim();
+        if (nome === "") {
+            alert("Por favor, preencha nome válido!");
+            return;
+        }
+        try {
+            console.log("Tag criada:", nome);
+            yield addTag(nome);
+        }
+        catch (error) {
+            alert(`Erro: ${error.message}`);
+        }
+    }));
+    associarBtn.addEventListener("click", () => __awaiter(this, void 0, void 0, function* () {
+        const taskId = parseInt(document.getElementById("lista-task").value);
+        const tagId = parseInt(document.getElementById("lista-tag").value);
+        if (isNaN(taskId) || isNaN(tagId)) {
+            alert("Por favor, selecione uma tarefa e uma tag para associar.");
+            return;
+        }
+        // Aqui você chamaria a função para associar a tag à tarefa
+        yield addtagTask(taskId, tagId);
+    }));
 }
 // Inicializar selects
 export function initializeSelects() {

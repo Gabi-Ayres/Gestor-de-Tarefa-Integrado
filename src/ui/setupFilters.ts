@@ -9,16 +9,16 @@ export function setupUserFilters(): void {
     const mostrarTodosBtn = document.getElementById("filter-all-users") as HTMLButtonElement;
 
     if (filtrarAtivosBtn) {
-        filtrarAtivosBtn.addEventListener("click", () => {
-            const utilizadoresAtivos = getUtilizadoresAtivos();
+        filtrarAtivosBtn.addEventListener("click", async () => {
+            const utilizadoresAtivos = await getUtilizadoresAtivos();
             renderUtilizadores(utilizadoresAtivos);
             atualizarContador();
         });
     }
 
     if (mostrarTodosBtn) {
-        mostrarTodosBtn.addEventListener("click", () => {
-            renderUtilizadores(getAllUtilizadores());
+        mostrarTodosBtn.addEventListener("click", async () => {
+            renderUtilizadores(await getAllUtilizadores());
             atualizarContador();
         });
     }
@@ -30,16 +30,16 @@ export function setupTaskFilters(): void {
     const mostrarTodasBtn = document.getElementById("filter-all-tasks") as HTMLButtonElement;
 
     if (filtrarPendentesBtn) {
-        filtrarPendentesBtn.addEventListener("click", () => {
-            const tarefasPendentes = getTarefasPendentes();
+        filtrarPendentesBtn.addEventListener("click", async () => {
+            const tarefasPendentes = await getTarefasPendentes();
             renderizarLista(tarefasPendentes);
             atualizarContadorTarefas();
         });
     }
 
     if (mostrarTodasBtn) {
-        mostrarTodasBtn.addEventListener("click", () => {
-            renderizarLista(getAllTarefas());
+        mostrarTodasBtn.addEventListener("click", async () => {
+            renderizarLista(await getAllTarefas());
             atualizarContadorTarefas();
         });
     }

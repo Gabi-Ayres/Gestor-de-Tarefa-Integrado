@@ -1,8 +1,7 @@
 // Aula 3 - Exercício 6: Import e Export
-// main.ts LIMPO - só coordena, não faz nada!
 import { teste } from './teste/teste.js';
 import { initializeData } from './services/index.js';
-import { setupUserForm, setupTaskForm, initializeSelects, setupUserFilters, setupTaskFilters, setupUserSearch, setupTaskSearch, setupUserSort, setupTaskSort, updateUI, updateUITarefas } from './ui/index.js';
+import { setupUserForm, setupTaskForm, initializeSelects, setupUserFilters, setupTaskFilters, setupUserSearch, setupTaskSearch, setupUserSort, setupTaskSort, updateUI, updateUITarefas, setupTagForm } from './ui/index.js';
 // Função principal de inicialização
 function initializeApp() {
     // 1. Carregar dados iniciais
@@ -10,6 +9,7 @@ function initializeApp() {
     // 2. Configurar formulários
     setupUserForm();
     setupTaskForm();
+    setupTagForm();
     // 3. Configurar filtros
     setupUserFilters();
     setupTaskFilters();

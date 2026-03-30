@@ -1,45 +1,39 @@
-export class TagService {
-  private taskTags: Map<number, string[]>;
+import { renderizarTags } from "../ui/renderTag.js";
+import { getTags, addTagToTask, createTag, getTasksByTag, deleteTag } from "../api/apiTagService.js";
+import { ITag, TagClass } from "../models/index.js";
 
-  constructor() {
-    this.taskTags = new Map();
-  }
+let listaTag: ITag[] = [];
 
-  addTag(taskId: number, tag: string): void {
-    if (!this.taskTags.has(taskId)) {
-      this.taskTags.set(taskId, []);
-    }
 
-    const tags = this.taskTags.get(taskId)!;
+export async function loadTags() {
+    console.log('Loading tags...');
+    const tagsApi = await getTags();
+  listaTag = tagsApi.map(tApi => new TagClass(tApi.id, tApi.name  ));
+  console.log('Tags loaded:', listaTag);  
+  renderizarTags(listaTag);
+}
 
-    if (!tags.includes(tag)) {
-      tags.push(tag);
-    }
-  }
+export function getAllTags(): ITag[] {
+    return listaTag;
+};
 
-  removeTag(taskId: number, tag: string): void {
-    const tags = this.taskTags.get(taskId);
-    if (!tags) return;
+export async function addtagTask(taskId: number, tagId: number): Promise <void> {
+    await addTagToTask(taskId, tagId);
+}
 
-    this.taskTags.set(
-      taskId,
-      tags.filter(t => t !== tag)
-    );
-  }
+export async function addTag(nome: string): Promise <void> {
+    await createTag(nome);
+     await loadTags();
+}
 
-  getTags(taskId: number): string[] {
-    return this.taskTags.get(taskId) ?? [];
-  }
+export async function getTasksByTagId(tagId: number): Promise<any[]> {
+    const tarefas = await getTasksByTag(tagId);
+    return tarefas;
+}
 
-  getTasksByTag(tag: string): number[] {
-    const result: number[] = [];
+// Função para remover uma tag
+export async function removeTag(id: number): Promise<void> {
+    await deleteTag(id);
+    await loadTags();
 
-    for (const [taskId, tags] of this.taskTags.entries()) {
-      if (tags.includes(tag)) {
-        result.push(taskId);
-      }
-    }
-
-    return result;
-  }
 }

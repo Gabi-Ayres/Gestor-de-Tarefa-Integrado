@@ -76,9 +76,8 @@
 
                     <select id="task-tipo" required>
                         <option value="" disabled selected>Tipo</option>
-                        <option value="task">📝 Normal</option>
-                        <option value="bug">🐛 Bug</option>
-                        <option value="feature">✨ Feature</option>
+                        
+
                     </select>
 
                     <select id="task-utilizador">
@@ -108,6 +107,49 @@
 
             <!-- Lista de Tarefas -->
             <ul id="task-list" class="task-list"></ul>
+        </section>
+
+        <section class="section">
+            <div class="section-header">
+                <h2>📊 Gerenciar Tags</h2>
+                            <!-- Formulário de Utilizadores -->
+            </div>
+            <div class="form-box">
+                <h3>Adicionar Tag</h3>
+                <div class="form-grid">
+                    <input type="text" id="tag-name" placeholder="Nome da tag" required>
+                </div>
+                <button type="button" id="tag-add-btn" class="btn-primary btn-block">
+                    ➕ Adicionar Nova Tag
+                </button>
+            </div>
+        
+            <ul id="tag-list" class="task-list"></ul>
+
+        </section>
+        
+        <section class="section">
+            <div class="section-header">
+                <h2>📊 Associar Tags as Tasks</h2>
+                            <!-- Formulário de Utilizadores -->
+            <div class="form-box">
+                <h3>Adicionar Tag</h3>
+                <div class="form-grid">
+                    <select id="lista-task" required>
+                        <option value="" disabled selected>Tasks</option>
+
+                    </select>
+                    <select id="lista-tag" required>
+                        <option value="" disabled selected>Tags</option>
+
+                    </select>
+                </div>
+                <button type="button" id="task-tag-add-btn" class="btn-primary btn-block">
+                    ➕ Adicionar Nova Tag
+                    </button>
+                
+            </div>
+        </div>
         </section>
     </main>
 

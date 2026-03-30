@@ -12,7 +12,8 @@ import {
     setupUserSort,
     setupTaskSort,
     updateUI,
-    updateUITarefas
+    updateUITarefas,
+    setupTagForm
 } from './ui/index.js';
 
 
@@ -25,6 +26,7 @@ function initializeApp(): void {
     // 2. Configurar formulários
     setupUserForm();
     setupTaskForm();
+    setupTagForm();
 
     // 3. Configurar filtros
     setupUserFilters();

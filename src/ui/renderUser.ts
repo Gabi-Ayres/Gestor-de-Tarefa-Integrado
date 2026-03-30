@@ -4,13 +4,13 @@ import { getTarefasPorUtilizador } from '../services/taskService.js';
 
 // Aula 3 - Exercício 5: Renderização UI
 
-export function renderUtilizadores(utilizadores: UtilizadorClass[]): void {
+export  function renderUtilizadores(utilizadores: UtilizadorClass[]): void {
     const contentor = document.querySelector("#user-container") as HTMLDivElement;
     if (!contentor) return;
     
     contentor.innerHTML = "";
 
-    utilizadores.forEach((utilizador) => {
+    utilizadores.forEach(async (utilizador) => {
         const card = document.createElement("div");
         card.className = 'card';
 
@@ -20,7 +20,7 @@ export function renderUtilizadores(utilizadores: UtilizadorClass[]): void {
         estadoParagrafo.style.color = utilizador.ativo ? "green" : "red";
 
         // INTEGRAÇÃO: Conta tarefas do utilizador
-        const tarefasDoUtilizador = getTarefasPorUtilizador(utilizador.id);
+        const tarefasDoUtilizador = await getTarefasPorUtilizador(utilizador.id);
         const tarefasParagrafo = document.createElement("p");
         tarefasParagrafo.innerHTML = `<strong>Tarefas:</strong> ${tarefasDoUtilizador.length} tarefa(s) atribuída(s)`;
         tarefasParagrafo.style.fontStyle = "italic";
@@ -59,10 +59,10 @@ export function renderUtilizadores(utilizadores: UtilizadorClass[]): void {
     atualizarContador();
 }
 
-export function atualizarContador(): void {
+export async function atualizarContador(): Promise <void> {
     const contadorElement = document.getElementById('user-contador');
     if (contadorElement) {
-        const { total, ativo, inativo } = getUtilizadoresCount();
+        const { total, ativo, inativo } = await getUtilizadoresCount();
         const estatistica = total > 0 ? ((ativo / total) * 100).toFixed(2) : '0';
         
         contadorElement.innerHTML = `
@@ -74,7 +74,7 @@ export function atualizarContador(): void {
     }
 }
 
-export function updateUI(): void {
+export  function updateUI(): void {
     renderUtilizadores(getAllUtilizadores());
 }
 
